@@ -53,4 +53,4 @@ while (True):
             send(resp)
         except:
             cb = Cleverbot()
-    time.sleep(10)
+    time.sleep(60)
