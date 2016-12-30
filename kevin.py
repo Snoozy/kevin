@@ -34,9 +34,9 @@ def getMostRecent():
 
 # returns the concatenation of multiple received msgs.
 def combineReceivedMsgs(msgs):
-    msg = msgs[0][1]
+    msg = msgs[0][1] if msgs[0][1] else ''
     i = 1
-    while i < len(msgs) and msgs[i][0] == 0:
+    while i < len(msgs) and msgs[i][0] == 0 and msgs[i][1]:
         msg = msgs[i][1] + '. ' + msg
         i += 1
     return msg
@@ -48,7 +48,7 @@ while (True):
         msg = combineReceivedMsgs(msgs)
         print("Last message: " + msg)
         try:
-            resp = cb.ask(msg).encode('utf8').replace(u'.', u'').replace(',', '').lower()
+            resp = cb.ask(msg.encode('utf8')).encode('utf8').replace(u'.', u'').replace(',', '').lower()
             print("Cleverbot response: " + resp)
             send(resp)
         except:
